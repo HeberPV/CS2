@@ -25,6 +25,7 @@ from rest_framework_swagger.views import get_swagger_view
 
 schema_view = get_swagger_view(title='Pastebin API')
 
+# Serializers define the API representation.
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
@@ -39,6 +40,8 @@ router.register(r'users', UserViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path(r'swagger/', schema_view),
-    re_path(r'^',include(router.urls))
+    path(r'swagger/', schema_view), 
+    re_path(r'^',include(router.urls)),
+    re_path(r'^api/v1/',include('Login.urls')),
+    re_path(r'api/v2/',include('Profile.urls'))
 ]
